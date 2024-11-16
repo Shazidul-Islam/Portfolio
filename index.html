@@ -37,7 +37,7 @@
           </p>
           <div class="cta-buttons">
             <a class="btn primary" href="./resume.pdf">View Resume</a>
-            <a class="btn secondary" href="">Contact Me</a>
+            <a class="btn secondary" href="#Contact">Contact Me</a>
           </div>
         </div>
         <div class="hero-image">
@@ -102,6 +102,7 @@
         }
       </script>
     </section>
+    <!------------------Education------------------->
     <section id="Education" class="education">
       <div class="container">
         <h2>Education & Qualifications</h2>
@@ -173,57 +174,38 @@
         </div>
       </div>
     </section>
-    
-    <section id="Contact" class="contact">
+    <!------------contact---------------------->
+    <section id="Contact">
       <div class="container">
-        <h2>Get In Touch</h2>
-        <div class="contact-content">
-          <div class="contact-info">
-            <div class="contact-item">
-              <i class="fas fa-envelope"></i>
-              <h3>Email</h3>
-              <p>shazidul.dipon24@gmail.com</p>
-            </div>
-            <div class="contact-item">
-              <i class="fas fa-phone"></i>
-              <h3>Phone</h3>
-              <p>+1 234 567 890</p>
-            </div>
-            <div class="contact-item">
-              <i class="fas fa-location-dot"></i>
-              <h3>Location</h3>
-              <p>Mirpur-2,Dhaka</p>
+        <div class="row">
+          <div class="contact-left">
+            <h1 class="sub_title">Get In Touch</h1>
+            <p><i class="fa-solid fa-at"></i> shazidul.dipon24@gmail.com</p>
+            <p><i class="fa-solid fa-phone"></i> +01822884466</p>
+            <p><i class="fa-solid fa-location-dot"></i> Mirpur-2,Dhaka</p>
+            <div class="social-icons">
+              <a href="https://www.facebook.com/shazidulislam.dipon"><i class="fa-brands fa-facebook"></i></a>
+              <a href="https://www.linkedin.com/in/shazidul-islam-017118203/"><i class="fa-brands fa-linkedin"></i></a>
+              <a href="https://github.com/Shazidul-Islam"><i class="fa-brands fa-github"></i></a>
+              <a href="https://www.instagram.com/shazidul.dipon24/"><i class="fa-brands fa-instagram"></i></a>
             </div>
           </div>
-          <form class="contact-form">
-            <div class="form-group">
-              <input type="text" placeholder="Your Name" required />
-            </div>
-            <div class="form-group">
-              <input type="email" placeholder="Your Email" required />
-            </div>
-            <div class="form-group">
-              <textarea placeholder="Your Message" required></textarea>
-            </div>
-            <button type="submit" class="btn primary">Send Message</button>
-          </form>
+          <div class="contact-right">
+            <form name="submit-to-google-sheet">
+              <input type="text" name="Name" placeholder="Your Name" required>
+              <input type="Eamil" name="Email" placeholder="Your Email" required>
+              <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+              <button type="submit"class="btn btn2">Submit</button>
+            </form>
+            <span id="msg"></span>
+          </div>
         </div>
       </div>
     </section>
-  </main>
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-social">
-          <a href="https://www.instagram.com/shazidul.dipon24/"><i class="fa-brands fa-instagram"></i></a>
-          <a href="https://www.linkedin.com/in/shazidul-islam-017118203/"><i class="fab fa-linkedin"></i></a>
-          <a href="https://www.facebook.com/shazidulislam.dipon"><i class="fa-brands fa-facebook"></i></a>
-        </div>
-        <p>&copy; 2024 Shazidul Islam. All rights reserved.</p>
-      </div>
+    <div class="footer">
+      <p>2024 Shazidul Islam <i class="fa-solid fa-user"></i> All rights reserved</p>
     </div>
-  </footer>
-
+  </main>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const menuIcon = document.querySelector('.menu');
@@ -234,6 +216,23 @@
         menuIcon.classList.toggle('active');
       });
     });
+  </script>
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwbw9MVUEidEM0VXdYbdi7L2zdqB8YVE7AXpfDRtMzRkIKw8YhqHyBTnvz0t0Dw63Qs/exec'
+    const form = document.forms['submit-to-google-sheet']
+    const msg=document.getElementById("msg")
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+          msg.innerHTML="Message sent successfully"
+          setTimeout(function(){
+            msg.innerHTML= ""
+          },5000)
+          form.reset()
+        })
+        .catch(error => console.error('Error!', error.message))
+    })
   </script>
 </body>
 
